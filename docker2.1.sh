@@ -47,7 +47,7 @@ function dock_pull {
 
 function dock_start_ecomm {
         echo "Starting Flopsar eCommerce..."
-        docker run -t --net $BRIDGE -p 8780:8780 --name $CONTAINER_ECOMM -e FLOPSAR_MANAGER=$CONTAINER_FLOPSAR -e FLOPSAR_ID=ecommerce -d $IMAGE_ECOMM /start-flopsar.sh
+        docker run -t --net $BRIDGE -p 8780:8780 --name $CONTAINER_ECOMM -e FLOPSAR_MANAGER=$CONTAINER_FLOPSAR -e FLOPSAR_ID=konakart -d $IMAGE_ECOMM /start-flopsar.sh
 }
 
 function dock_start_load {
