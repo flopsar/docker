@@ -87,7 +87,7 @@ function clear_all {
 
 
 function start_all {
-        #dock_pull
+        dock_pull
         networking
         dock_start_core $2
         for (( i=0; i<$1; i++ ))
