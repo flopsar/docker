@@ -63,8 +63,8 @@ function dock_start_core {
 }
 
 function workstation_run {
-        docker cp $CONTAINER_FLOPSAR:/home/flopsar/workstation.zip .
-        unzip -o workstation.zip
+        docker cp $CONTAINER_FLOPSAR:/home/flopsar/workstation-2.2.zip .
+        unzip -o workstation-2.2.zip
         echo "You can now start workstation."
 }
 
