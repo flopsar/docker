@@ -1,15 +1,19 @@
 #!/bin/bash
-
-
 # Copyright (C) Flopsar Technology Sp. z o.o.
+
+
+#Set Flopsar version here.
+#Version must be greater than 2.3.1.
+VERSION="2.3.2"
 
 CONTAINER_ECOMM="myFlopsarEcommerce"
 CONTAINER_FLOPSAR="myFlopsarDB"
 CONTAINER_LOAD="myFlopsarLoader"
 
-IMAGE_ECOMM="flopsar/ecommerce:2.3"
-IMAGE_FLOPSAR="flopsar/flopsar:2.3"
+IMAGE_ECOMM="flopsar/ecommerce:"$VERSION
+IMAGE_FLOPSAR="flopsar/flopsar:"$VERSION
 IMAGE_LOAD="flopsar/ecommerce-load:latest"
+AGENT="flopsar-agent-"$VERSION".jar"
 
 BRIDGE=flopsar_bridge
 
@@ -46,7 +50,7 @@ function dock_pull {
 
 function dock_start_ecomm {
         echo "Starting Flopsar eCommerce..."
-        docker run -t --net $BRIDGE -p 8780:8780 --name $CONTAINER_ECOMM -e FLOPSAR_MANAGER=$CONTAINER_FLOPSAR -e FLOPSAR_ID=konakart -d $IMAGE_ECOMM /start-flopsar.sh
+        docker run -t --net $BRIDGE -p 8780:8780 --name $CONTAINER_ECOMM -e FLOPSAR_AGENT=$AGENT -e FLOPSAR_MANAGER=$CONTAINER_FLOPSAR -e FLOPSAR_ID=konakart -d $IMAGE_ECOMM /start-flopsar.sh
 }
 
 function dock_start_load {
@@ -63,8 +67,8 @@ function dock_start_core {
 }
 
 function workstation_run {
-        docker cp $CONTAINER_FLOPSAR:/home/flopsar/workstation-2.3.zip .
-        unzip -o workstation-2.3.zip
+        docker cp $CONTAINER_FLOPSAR:/home/flopsar/workstation-$VERSION.zip .
+        unzip -o workstation-$VERSION.zip
         echo "You can now start workstation."
 }
 
@@ -77,7 +81,6 @@ function networking {
 
 #main
 main() {
-
         if [ $# -ne 1 ];
         then usage; exit;
         fi
@@ -95,4 +98,3 @@ main() {
 
 
 main "$@"
-
