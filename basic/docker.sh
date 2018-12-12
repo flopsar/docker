@@ -4,7 +4,7 @@
 
 #Set Flopsar version here.
 #Version must be greater than 2.3.1.
-VERSION="2.3.2"
+VERSION="2.4.0"
 
 CONTAINER_ECOMM="myFlopsarEcommerce"
 CONTAINER_FLOPSAR="myFlopsarDB"
@@ -61,7 +61,7 @@ function dock_start_load {
 
 function dock_start_core {
         echo "Starting Flopsar Manager and Database..."
-        docker run -it --net $BRIDGE -p 9000:9000 -p 10001:10001 --name $CONTAINER_FLOPSAR -d $IMAGE_FLOPSAR
+        docker run -it --net $BRIDGE -p 9000:9000 -p 10000:10000 -p 10001:10001 --name $CONTAINER_FLOPSAR -d $IMAGE_FLOPSAR
         docker cp $1 $CONTAINER_FLOPSAR:/home/flopsar/flopsar-mgr/lic/
         docker exec -td $CONTAINER_FLOPSAR /start-flopsar.sh
 }
