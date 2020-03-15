@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  demo-server:    
+    image: flopsar/demo-server:3.0.0
+    tty: true
+    ports:
+      - "9000:9000"    
+
+  konakart:
+    image: flopsar/demo-ecommerce:3.0.0
+    depends_on:
+      - "demo-server"
+    environment:
+      - FLOPSAR_MANAGER=demo-server
+      - FLOPSAR_ID=Konakart  
+
+  demo-loader:
+    image: flopsar/ecommerce-load:latest    
+    command: ["/start-load.sh"]
+    depends_on:
+      - "konakart"
