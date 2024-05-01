@@ -1,3 +1,6 @@
 license.key
 workstation*
 .DS_Store
+*.deb
+*.zip
+*.rpm
